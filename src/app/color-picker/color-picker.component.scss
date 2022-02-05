@@ -1,0 +1,108 @@
+$colorSquareSize: 25px;
+
+.color-picker {
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  display: inline-block;
+  position: relative;
+
+  &__btn {
+    background-color: rgb(41, 204, 41);
+    color: white;
+    font-weight: 600;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  &__body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px solid silver;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: white;
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__selected {
+    margin-bottom: 20px;
+    min-height: $colorSquareSize;
+
+    &_item {
+      text-align: center;
+      color: black;
+    }
+  }
+
+  &__not-selected-msg {
+    font-size: 14px;
+    color: red;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(7, $colorSquareSize);
+    grid-template-rows: repeat(4, $colorSquareSize);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  &__list_item {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+	&__advanced {
+
+		&_row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+		}
+
+		&_icon {
+      font-size: 25px;
+      cursor: pointer;
+      transition-duration: 0.3s;
+		}
+
+		&_input {
+      input {
+        width: 50%;
+        padding: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: none;
+        }
+      }
+		}
+  }
+
+  &__rotated-icon {
+    transform: rotate(45deg);
+  }
+
+}
+
+.ng-invalid:not(form):not(div)  {
+  border: 2px solid red;
+}
+
+.ng-valid:not(form):not(div)  {
+  border: 2px solid green;
+}

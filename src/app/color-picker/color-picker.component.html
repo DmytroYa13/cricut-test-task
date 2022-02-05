@@ -1,0 +1,50 @@
+<div class="color-picker" (clickOutside)="closeColorPicker()">
+
+  <button class="color-picker__btn" (click)="openColorPicker()">change color</button>
+
+  <div *ngIf="isPickerOpen" class="color-picker__body">
+    <div class="color-picker__title">Material colors</div>
+    <div class="color-picker__selected">
+
+      <span
+        *ngIf="selectedColor; else noSelectedColor"
+        class="color-picker__list_item color-picker__selected_item"
+        title="{{selectedColor?.colorName}}"
+        [ngStyle]="{'background': selectedColor?.colorName}">&#10004;
+      </span>
+
+      <ng-template #noSelectedColor>
+        <span class="color-picker__not-selected-msg">Color not selected</span>
+      </ng-template>
+
+    </div>
+
+    <div class="color-picker__list">
+      <span
+        *ngFor="let color of colorsList"
+        (click)="selectColor(color)"
+        class="color-picker__list_item"
+        title="{{color.colorName}}"
+        [ngStyle]="{'background': color.colorName}">
+      </span>
+    </div>
+
+    <div class="color-picker__advanced">
+
+      <div class="color-picker__advanced_row">
+        <span class="color-picker__advanced_text">Advanced</span>
+        <span
+          (click)="toggleAdvancedForm()"
+          class="color-picker__advanced_icon"
+          [class.color-picker__rotated-icon]="hexCodeForm">&plus;</span>
+      </div>
+
+      <div *ngIf="hexCodeForm" class="color-picker__advanced_input">
+        <form [formGroup]="hexCodeForm">
+          <input type="text" formControlName="hexCode">
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

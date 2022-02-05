@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Color } from './shared/interfaces/color.interface';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cricut';
+
+  color!: Color;
+
+  setColor(color: Color) {
+    this.color = color;
+  }
 }

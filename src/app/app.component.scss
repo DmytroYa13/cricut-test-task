@@ -1,0 +1,19 @@
+.wrapper {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.color-preview{
+  height: 200px;
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+
+  div:first-child{
+    height: 100%;
+    border-radius: 5px;
+    color: white;
+  }
+}
