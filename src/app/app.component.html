@@ -5,8 +5,12 @@
   </div>
 
   <div class="color-preview">
-    <div *ngIf="color" [ngStyle]="{'background': color.colorName}">
-      {{color | json }}
+    <div
+      *ngIf="color"
+      [ngStyle]="{'background': color.colorName}"
+      class="color-preview__square"
+      >
+      <span class="color-preview__info">{{color | json }}</span>
     </div>
   </div>
 

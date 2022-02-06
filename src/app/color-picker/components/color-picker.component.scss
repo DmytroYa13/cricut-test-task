@@ -1,4 +1,5 @@
 $colorSquareSize: 25px;
+$marginValue: 20px;
 
 .color-picker {
 
@@ -30,16 +31,21 @@ $colorSquareSize: 25px;
   }
 
   &__title {
-    margin-bottom: 20px;
+    margin-bottom: $marginValue;
   }
 
   &__selected {
-    margin-bottom: 20px;
+    margin-bottom: $marginValue;
     min-height: $colorSquareSize;
 
     &_item {
       text-align: center;
-      color: black;
+
+      span {
+        color: gray;
+        font-size: 13px;
+        mix-blend-mode: difference;
+      }
     }
   }
 
@@ -53,7 +59,7 @@ $colorSquareSize: 25px;
     grid-template-columns: repeat(7, $colorSquareSize);
     grid-template-rows: repeat(4, $colorSquareSize);
     grid-gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: $marginValue;
   }
 
   &__list_item {
@@ -61,6 +67,7 @@ $colorSquareSize: 25px;
     width: 25px;
     height: 25px;
     border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
   }
 
@@ -80,16 +87,28 @@ $colorSquareSize: 25px;
 		}
 
 		&_input {
+
+      label {
+        font-size: 12px;
+        margin-right: 10px;
+      }
+
       input {
         width: 50%;
         padding: 5px;
         font-size: 16px;
-        box-sizing: border-box;
+        border-radius: 3px;
+        border: 1px solid black;
 
         &:focus {
           outline: none;
         }
       }
+
+      .ng-invalid:not(form):not(div)  {
+        border-color: red;
+      }
+
 		}
   }
 
@@ -99,10 +118,4 @@ $colorSquareSize: 25px;
 
 }
 
-.ng-invalid:not(form):not(div)  {
-  border: 2px solid red;
-}
 
-.ng-valid:not(form):not(div)  {
-  border: 2px solid green;
-}

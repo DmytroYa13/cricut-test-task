@@ -1,4 +1,4 @@
-import { Color } from "./interfaces/color.interface";
+import { Color } from "../../shared/interfaces/color.interface";
 
 export const colorsList: Color[] = [
   { colorID: '#ef9999', colorName: '#ef9999' },
