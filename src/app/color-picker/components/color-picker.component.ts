@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { Color } from 'src/app/shared/interfaces/color.interface';
 import { colorsList } from '../consts/colors';
-
-
 @Component({
   selector: 'color-picker',
   templateUrl: './color-picker.component.html',
@@ -15,12 +11,14 @@ export class ColorPickerComponent {
   @Output()
   private event: EventEmitter<Color> = new EventEmitter<Color>();
 
+  readonly colorsList: Color[] = colorsList;
   public selectedColor!: Color;
-  public colorsList: Color[] = colorsList;
   public isPickerOpen: boolean = false;
-  private formSubscription!: Subscription;
 
-  public hexCodeForm!: FormGroup | null;
+  public selectColor(color: Color): void {
+    this.selectedColor = color;
+    this.event.emit(color);
+  }
 
   public openColorPicker(): void {
     this.isPickerOpen = true;
@@ -29,63 +27,13 @@ export class ColorPickerComponent {
   public closeColorPicker(): void {
     if (this.isPickerOpen) {
       this.isPickerOpen = false;
-      this.destroyHexForm();
     }
   }
 
-  public selectColor(color: Color): void {
-    this.changeColor(color);
-    this.setValueToForm(color);
-  }
 
-  public toggleHexForm(): void {
-    if (this.hexCodeForm) {
-      this.destroyHexForm();
-    } else {
-      this.initHexForm();
-      this.onHexCodeFormSubscribe();
-    }
-  }
 
-  private changeColor(color: Color): void {
-    this.selectedColor = color;
-    this.event.emit(color);
-  }
 
-  private setValueToForm(color: Color): void {
-    if (this.hexCodeForm) {
-      this.hexCodeForm.patchValue({ hexCode: color.colorName });
-    }
-  }
 
-  private initHexForm(): void {
-    this.hexCodeForm = new FormGroup({
-      hexCode: new FormControl(
-        this.selectedColor ? this.selectedColor.colorName : '#',
-        [Validators.required, Validators.maxLength(7), Validators.pattern(/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i)]
-      )
-    })
-  }
 
-  private destroyHexForm(): void {
-    this.hexCodeForm = null;
-    if (this.formSubscription) {
-      this.formSubscription.unsubscribe();
-    }
-  }
-
-  private onHexCodeFormSubscribe(): void {
-    if (this.hexCodeForm) {
-      this.formSubscription = this.hexCodeForm!.valueChanges.subscribe(formValues => {
-        if (this.hexCodeForm!.valid) {
-          const color: Color = {
-            colorID: formValues.hexCode,
-            colorName: formValues.hexCode
-          };
-          this.changeColor(color);
-        }
-      })
-    }
-  }
 
 }

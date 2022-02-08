@@ -4,14 +4,12 @@
 
   <div *ngIf="isPickerOpen" class="color-picker__body">
     <div class="color-picker__title">Material colors</div>
-    <div class="color-picker__selected">
+    <div class="color-picker__selected-block">
 
-      <div
-        *ngIf="selectedColor; else noSelectedColor"
-        class="color-picker__list_item color-picker__selected_item"
+      <div *ngIf="selectedColor; else noSelectedColor"
+      class="color-picker__color-item color-picker__selected-item"
         title="{{selectedColor?.colorName}}"
-        [ngStyle]="{'background': selectedColor?.colorName}"
-        >
+        [ngStyle]="{'background-color': selectedColor?.colorName}">
         <span>&#10004;</span>
       </div>
 
@@ -21,33 +19,18 @@
 
     </div>
 
-    <div class="color-picker__list">
-      <div
-        *ngFor="let color of colorsList"
-        (click)="selectColor(color)"
-        class="color-picker__list_item"
+    <div class="color-picker__color-list">
+      <div *ngFor="let color of colorsList" (click)="selectColor(color)"
+      class="color-picker__color-item"
         title="{{color.colorName}}"
-        [ngStyle]="{'background': color.colorName}">
+        [ngStyle]="{'background-color': color.colorName}">
       </div>
     </div>
 
     <div class="color-picker__advanced">
-
       <div class="color-picker__advanced_row">
         <span class="color-picker__advanced_text">Advanced</span>
-        <span
-          (click)="toggleHexForm()"
-          class="color-picker__advanced_icon"
-          [class.color-picker__rotated-icon]="hexCodeForm">&plus;</span>
       </div>
-
-      <div *ngIf="hexCodeForm" class="color-picker__advanced_input">
-        <form [formGroup]="hexCodeForm">
-          <label for="hexCode">hexcode </label>
-          <input type="text" formControlName="hexCode">
-        </form>
-      </div>
-
     </div>
   </div>
 </div>
